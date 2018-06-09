@@ -1,34 +1,36 @@
+let numberOfNotes = 0
 let beatLength = 0
-let beatSwitcher = 0
+let noteIncrementAmount = 0
 let playMusic = false
+let beatSwitcher = 0
 function playNote()  {
-    if (input.lightLevel() <= 15) {
+    if (input.lightLevel() <= noteIncrementAmount * 1) {
         music.playTone(131, beatLength)
-    } else if (input.lightLevel() <= 30) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 2) {
         music.playTone(147, beatLength)
-    } else if (input.lightLevel() <= 45) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 3) {
         music.playTone(165, beatLength)
-    } else if (input.lightLevel() <= 60) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 4) {
         music.playTone(175, beatLength)
-    } else if (input.lightLevel() <= 75) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 5) {
         music.playTone(196, beatLength)
-    } else if (input.lightLevel() <= 90) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 6) {
         music.playTone(220, beatLength)
-    } else if (input.lightLevel() <= 105) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 7) {
         music.playTone(247, beatLength)
-    } else if (input.lightLevel() <= 120) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 8) {
         music.playTone(262, beatLength)
-    } else if (input.lightLevel() <= 135) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 9) {
         music.playTone(294, beatLength)
-    } else if (input.lightLevel() <= 150) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 10) {
         music.playTone(294, beatLength)
-    } else if (input.lightLevel() <= 165) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 11) {
         music.playTone(330, beatLength)
-    } else if (input.lightLevel() <= 180) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 12) {
         music.playTone(349, beatLength)
-    } else if (input.lightLevel() <= 210) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 13) {
         music.playTone(392, beatLength)
-    } else if (input.lightLevel() <= 195) {
+    } else if (input.lightLevel() <= noteIncrementAmount * 14) {
         music.playTone(440, beatLength)
     } else {
         music.playTone(494, beatLength)
@@ -58,9 +60,14 @@ input.onButtonPressed(Button.B, () => {
         beatLength = music.beat(BeatFraction.Sixteenth)
     }
 })
-playMusic = false
+input.onButtonPressed(Button.AB, () => {
+    noteIncrementAmount = input.lightLevel() / numberOfNotes
+})
+playMusic = true
 beatSwitcher = 0
 beatLength = music.beat(BeatFraction.Whole)
+numberOfNotes = 15
+noteIncrementAmount = 255 / numberOfNotes
 basic.forever(() => {
     if (playMusic == true) {
         playNote()
